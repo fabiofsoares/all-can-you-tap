@@ -1,3 +1,8 @@
-<p>
-  user-page works!
-</p>
+<div>
+    <h1>Time : {{time}}</h1>
+    <p>{{qtt}}</p>
+
+    <button [disabled]="stop" (click)="onClickMe()">ON CLICK</button> <br><br>
+
+    <button (click)="onRestart()">RESTART</button>
+</div>

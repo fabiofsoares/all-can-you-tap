@@ -62,7 +62,6 @@ Export
           this.resetFormDataRegister = true;
         })
         .catch( (apiResponse: ApiResponseModel) => {
-          console.log(apiResponse)
           // API error response
           this.messageClassRegister = 'error';
           this.apiMessageRegister = apiResponse.message;
@@ -84,7 +83,6 @@ Export
           this.resetFormDataLogin = true;
         })
         .catch( (apiResponse: ApiResponseModel) => {
-          console.log(apiResponse)
           // API error response
           this.messageClassLogin = 'error';
           this.apiMessageLogin = apiResponse.message;

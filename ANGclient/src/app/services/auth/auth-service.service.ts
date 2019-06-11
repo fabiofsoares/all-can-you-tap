@@ -69,7 +69,7 @@ Definition
     // Function to get user identity from server
     public getUserId(): Promise<any>{
       // POST '/auth/login'
-      return this.HttpClient.get(`${environment.apiUrl}/auth`)
+      return this.HttpClient.get(`${environment.apiUrl}/auth/`)
       .toPromise().then(this.getData).catch(this.handleError);
     };
 

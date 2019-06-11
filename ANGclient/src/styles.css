@@ -69,8 +69,8 @@ Reset
     }
 
     button{
-        border: none;
-        background: transparent;
+        /* border: none;
+        background: transparent; */
     }
 
     [type="submit"]{
