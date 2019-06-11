@@ -404,7 +404,6 @@ var HomePageComponent = /** @class */ (function () {
                 _this.resetFormDataRegister = true;
             })
                 .catch(function (apiResponse) {
-                console.log(apiResponse);
                 // API error response
                 _this.messageClassRegister = 'error';
                 _this.apiMessageRegister = apiResponse.message;
@@ -424,7 +423,6 @@ var HomePageComponent = /** @class */ (function () {
                 _this.resetFormDataLogin = true;
             })
                 .catch(function (apiResponse) {
-                console.log(apiResponse);
                 // API error response
                 _this.messageClassLogin = 'error';
                 _this.apiMessageLogin = apiResponse.message;

@@ -95,7 +95,7 @@ Routes definition
              * @callback => send user _id and date informations
             */
             authRouter.get( '/', this.passport.authenticate('jwt', { session: false }), (req, res) => {
-                // Check if identity is validated for security strategy
+               // Check if identity is validated for security strategy
                 if(req.user.isValidated) return sendApiSuccessResponse(res, Vocabulary.request.success, { _id: req.user._id, lastConnection: req.user.lastConnection })
                 else return sendApiErrorResponse(res, Vocabulary.request.error, 'Identity not validated');
             });

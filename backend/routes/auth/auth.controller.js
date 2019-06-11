@@ -30,18 +30,19 @@ Methods
                         // Set creation and connection date
                         body.creationDate = new Date();
                         body.lastConnection = null;
-                        body.isValidated = false;
+                        body.isValidated = true;
 
                         // Register new user
                         IdentityModel.create(body)
                         .then( mongoResponse => {
-                            sendEmail(mongoResponse, clearPassword)
-                            .then( mailerResponse => {
-                                resolve({ _id: mongoResponse._id, creationDate: mongoResponse.creationDate })
-                            })
-                            .catch( mailerResponse => {
-                                reject(mailerResponse)
-                            })
+                            resolve({ _id: mongoResponse._id, creationDate: mongoResponse.creationDate })
+                            // sendEmail(mongoResponse, clearPassword)
+                            // .then( mailerResponse => {
+                            //     resolve({ _id: mongoResponse._id, creationDate: mongoResponse.creationDate })
+                            // })
+                            // .catch( mailerResponse => {
+                            //     reject(mailerResponse)
+                            // })
                             
                         })
                         .catch( mongoResponse => reject(mongoResponse) )
@@ -101,7 +102,7 @@ Methods
                         if( !validPassword ) reject('Password is not valid')
                         else {
                             // Set cookie
-                            res.cookie(process.env.COOKIE_NAME, user.generateJwt(), { httpOnly: true });
+                            res.cookie(process.env.COOKIE_NAME, user.generateJwt(user._id), { httpOnly: true });
                             
                             // Define user last connection
                             const lastConnection = user.lastConnection;
@@ -148,7 +149,7 @@ Methods
                             user.password = hashedPassword;
                             
                             // Set cookie
-                            res.cookie(process.env.COOKIE_NAME, user.generateJwt(), { httpOnly: true });
+                            res.cookie(process.env.COOKIE_NAME, user.generateJwt(user._id), { httpOnly: true });
 
                             // Save new password
                             user.save( (error, user) => {

@@ -9,6 +9,7 @@ Imports
     const path = require('path');
     const ejs = require('ejs');
     const morgan = require('morgan');
+    var cors = require('cors')
 
     // Inner
     const mongoDB = require('./services/db.service');
@@ -32,7 +33,9 @@ Server configuration
             server.engine( 'html', ejs.renderFile );
             server.set( 'view engine', 'html' );
             server.set( 'views', __dirname + '/www' );
+            //server.set( 'views', './www' );
             server.use( express.static(path.join(__dirname, 'www')) );
+            //server.use( cors() )
 
             //=> Use BodyParser to get user body data
             server.use(bodyParser.json({limit: '10mb'}));

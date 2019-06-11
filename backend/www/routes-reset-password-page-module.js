@@ -139,7 +139,6 @@ var ResetPasswordPageComponent = /** @class */ (function () {
                     _this.resetFormData = true;
                 })
                     .catch(function (apiResponse) {
-                    console.log(apiResponse);
                     // API error response
                     _this.messageClass = 'error';
                     _this.apiMessage = apiResponse.message;

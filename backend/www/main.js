@@ -176,7 +176,7 @@ var AppModule = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainRouter", function() { return MainRouter; });
 /* harmony import */ var _auth_guard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./auth.guard */ "./src/app/auth.guard.ts");
-// Inner
+// Import AuthGuuard to define route accessibility
 
 //
 /*
@@ -194,12 +194,12 @@ var MainRouter = [
     {
         path: 'reset-password',
         loadChildren: './routes/reset-password-page/module#Module',
-        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]]
+        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]] // Accessible for connected user
     },
     {
         path: 'me',
         loadChildren: './routes/user-page/module#Module',
-        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]]
+        canActivate: [_auth_guard__WEBPACK_IMPORTED_MODULE_0__["AuthGuard"]] // Accessible for connected user
     }
 ];
 //
@@ -224,6 +224,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /*
 Imports & definition
+https://gist.github.com/DWS-paris/65df1566222cd9819e3050e96af6f0c6
 */
 // Imports
 
@@ -239,10 +240,11 @@ var AuthGuard = /** @class */ (function () {
         this.Router = Router;
     }
     //
-    /*
-    Auth strategy
-    Parameters are used to define specific methods (if needed)
-    */
+    /**
+     * AuthGurad Strategy: thee canActivate is used in 'app.router'
+     * @param next : informations about the route component => https://bit.ly/2VT2Us1
+     * @param state : the state of the router => https://bit.ly/2Uo3zjO
+     */
     AuthGuard.prototype.canActivate = function (next, state) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -449,7 +451,7 @@ var AuthService = /** @class */ (function () {
     // Function to get user identity from server
     AuthService.prototype.getUserId = function () {
         // POST '/auth/login'
-        return this.HttpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "/auth")
+        return this.HttpClient.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + "/auth/")
             .toPromise().then(this.getData).catch(this.handleError);
     };
     ;
@@ -491,7 +493,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    apiUrl: "http://localhost:7887/api",
+    apiUrl: "http://localhost:3000/api",
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -538,7 +540,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dwsparis/Documents/htdocs/PROJETS/MEAN_boilerplate/ANGclient/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/fferreir/Documents/ECV Digital/all-can-you-tap/ANGclient/src/main.ts */"./src/main.ts");
 
 
 /***/ })
