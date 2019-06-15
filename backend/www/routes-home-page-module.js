@@ -365,6 +365,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth/auth-service.service */ "./src/app/services/auth/auth-service.service.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.es5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 /*
 Imports & definition
@@ -372,12 +374,17 @@ Imports & definition
 // Imports
 
 
+// Cookie service
+
+
 // Definition
 var HomePageComponent = /** @class */ (function () {
     // Module injection
-    function HomePageComponent(AuthService) {
+    function HomePageComponent(AuthService, Router, cookieService) {
         var _this = this;
         this.AuthService = AuthService;
+        this.Router = Router;
+        this.cookieService = cookieService;
         /*
         Config.
         */
@@ -402,6 +409,8 @@ var HomePageComponent = /** @class */ (function () {
                 _this.displayReturnRegister = true;
                 // Reset form data
                 _this.resetFormDataRegister = true;
+                _this.cookieService.set('userid', apiResponse.data._id);
+                _this.Router.navigate(['me']);
             })
                 .catch(function (apiResponse) {
                 // API error response
@@ -421,6 +430,8 @@ var HomePageComponent = /** @class */ (function () {
                 _this.displayReturnLogin = true;
                 // Reset form data
                 _this.resetFormDataLogin = true;
+                _this.cookieService.set('userid', apiResponse.data._id);
+                _this.Router.navigate(['me']);
             })
                 .catch(function (apiResponse) {
                 // API error response
@@ -441,14 +452,16 @@ var HomePageComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-home-page',
             template: __webpack_require__(/*! ./home-page.component.html */ "./src/app/routes/home-page/home-page.component.html"),
-            providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]]
+            providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"]]
         })
         //
         /*
         Export
         */
         ,
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            ngx_cookie_service__WEBPACK_IMPORTED_MODULE_3__["CookieService"]])
     ], HomePageComponent);
     return HomePageComponent;
 }());

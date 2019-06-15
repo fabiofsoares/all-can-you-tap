@@ -14,6 +14,7 @@ Imports
 
   // Inner modules
   import { HeaderModule } from "./components/header/module";
+  import { CookieService } from 'ngx-cookie-service';
 //
 
 
@@ -30,7 +31,7 @@ Definition
       HttpClientModule,
       HeaderModule
     ],
-    providers: [ AuthService ],
+    providers: [ CookieService, AuthService ],
     bootstrap: [ AppComponent ]
   })
 //

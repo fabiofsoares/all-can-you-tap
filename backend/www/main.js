@@ -112,6 +112,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.router */ "./src/app/app.router.ts");
 /* harmony import */ var _components_header_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/header/module */ "./src/app/components/header/module.ts");
+/* harmony import */ var ngx_cookie_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-cookie-service */ "./node_modules/ngx-cookie-service/ngx-cookie-service.es5.js");
 
 /*
 Imports
@@ -126,6 +127,7 @@ Imports
 
 
 // Inner modules
+
 
 //
 /*
@@ -149,7 +151,7 @@ var AppModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
                 _components_header_module__WEBPACK_IMPORTED_MODULE_8__["HeaderModule"]
             ],
-            providers: [_services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]],
+            providers: [ngx_cookie_service__WEBPACK_IMPORTED_MODULE_9__["CookieService"], _services_auth_auth_service_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
         })
         //

@@ -10,12 +10,14 @@ Imports & definition
   import { ApiResponseModel } from "../../models/api.reponse.model";
   import { AuthService } from "../../services/auth/auth-service.service";
   import { GameService } from "../../services/game/game-service.service";
+   // Cookie service
+  import { CookieService } from 'ngx-cookie-service';
 
   // Definition
   @Component({
     selector: 'app-user-page',
     templateUrl: './user-page.component.html',
-    providers: [ AuthService, GameService ]
+    providers: [ AuthService, GameService, CookieService ]
   })
 //
 
@@ -26,10 +28,11 @@ Export
   export class UserPageComponent implements OnInit {
     user: IdentityModel[] = [];
     qtt = 0;
-    time = 0;
+    time = 5;
     stop = false;
     first = true;
     data = {};
+    games = {}
     public apiMessageLogin : String
     /* 
     Config.
@@ -37,7 +40,8 @@ Export
       // Module injection
       constructor(
         private AuthService: AuthService,
-        private GameService: GameService
+        private GameService: GameService,
+        private cookieService: CookieService
       ) {};
     //
 
@@ -59,21 +63,21 @@ Export
 
     onRestart() {
         this.qtt = 0;
-        this.time = 0;
+        this.time = 5;
         this.stop = false;
         this.first = true;
     }
 
     startGame() {
         let id = setInterval( () => {
-            if(this.time < 3) {
-                this.time++;
+            if(this.time !== 0) {
+                this.time--;
             } else {
                 clearInterval(id)
                 this.stop = true;
                 
                 let data = {
-                    user : this.user.data._id,
+                    user : this.cookieService.get('userid'),
                     point : this.qtt,
                     time : new Date()
                 }
@@ -84,37 +88,33 @@ Export
         }, 1000)
     }
 
-   /*  saveGame() {
-        let game = {
-            user : this.user.data._id,
-            point : this.qtt,
-            time : new Date()
-        }       
-        console.log('final : ', game)
-    } */
-
     public saveGame = (data : GameModel) => {
         // Send user data
         this.GameService.save(data)
         .then( (apiResponse: ApiResponseModel) => {
             // API success response
             this.apiMessageLogin = apiResponse.message;
-            console.log('sucess :', this.apiMessageLogin)    
+            console.log('sucess :', this.apiMessageLogin); 
+            this.getAll();   
         })
         .catch( (apiResponse: ApiResponseModel) => {
             // API error response
             this.apiMessageLogin = apiResponse.message;
             console.log('error :', this.apiMessageLogin)
         })
-    }; 
+    };
+
+    public function getAll() {
+        this.GameService.getGames().then((data : GameModel[]) => {
+            this.games = data.message;
+        }) 
+    } 
 
     /* 
     Hooks
     */
-    ngOnInit() { 
-        this.AuthService.getUserId().then((userData: IdentityModel[]) => {
-            this.user = userData;           
-        });       
+    ngOnInit() {         
+        this.getAll();
     };
     //
   }
