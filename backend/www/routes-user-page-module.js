@@ -99,7 +99,7 @@ var Routing = _angular_router__WEBPACK_IMPORTED_MODULE_0__["RouterModule"].forCh
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div>\n    <p>Mee</p>\n    <h1>Time : {{time}}</h1>\n    <p>{{qtt}}</p>\n\n    <button [disabled]=\"stop\" (click)=\"onClickMe()\">ON CLICK</button> <br><br>\n\n    <button (click)=\"onRestart()\">RESTART</button>\n\n    <h2>Ranking</h2>\n    <div *ngFor=\"let game of games\">\n        <div>Point : {{game.point}}</div>\n        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n    </div>\n</div>"
+module.exports = "<div class=\"container-me\">\n    <div class=\"content game\">\n        <h2>Timing : {{time}}</h2>\n        <div class=\"button-container on-container\">\n            <button [disabled]=\"stop\" (click)=\"onClickMe()\" class=\"on-button\">{{qtt === 0 ? \"START\" : qtt}}</button>\n        </div>\n        <div class=\"button-container restart-container\">\n            <button (click)=\"onRestart()\" class=\"restart-button\">RESTART</button>\n        </div>\n    </div>\n    <div class=\"content ranking\">\n        <h2>Ranking</h2>\n        <div class=\"item\" *ngFor=\"let game of games\">\n            <div>Point : {{game.point}}</div>\n            <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
@@ -153,6 +153,7 @@ var UserPageComponent = /** @class */ (function () {
                 // API success response
                 _this.apiMessageLogin = apiResponse.message;
                 console.log('sucess :', _this.apiMessageLogin);
+                _this.getAll();
             })
                 .catch(function (apiResponse) {
                 // API error response
@@ -201,14 +202,17 @@ var UserPageComponent = /** @class */ (function () {
             }
         }, 1000);
     };
-    /*
-    Hooks
-    */
-    UserPageComponent.prototype.ngOnInit = function () {
+    UserPageComponent.prototype.getAll = function () {
         var _this = this;
         this.GameService.getGames().then(function (data) {
             _this.games = data.message;
         });
+    };
+    /*
+    Hooks
+    */
+    UserPageComponent.prototype.ngOnInit = function () {
+        this.getAll();
     };
     ;
     UserPageComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([

@@ -104,10 +104,10 @@ Export
         })
     };
 
-    public function getAll() {
+    public getAll() {
         this.GameService.getGames().then((data : GameModel[]) => {
-            this.games = data.message;
-        }) 
+            this.games = data.message
+        }); 
     } 
 
     /* 

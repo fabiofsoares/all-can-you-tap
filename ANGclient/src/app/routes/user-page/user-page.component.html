@@ -1,15 +1,18 @@
-<div>
-    <p>Mee</p>
-    <h1>Time : {{time}}</h1>
-    <p>{{qtt}}</p>
-
-    <button [disabled]="stop" (click)="onClickMe()">ON CLICK</button> <br><br>
-
-    <button (click)="onRestart()">RESTART</button>
-
-    <h2>Ranking</h2>
-    <div *ngFor="let game of games">
-        <div>Point : {{game.point}}</div>
-        <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
+<div class="container-me">
+    <div class="content game">
+        <h2>Timing : {{time}}</h2>
+        <div class="button-container on-container">
+            <button [disabled]="stop" (click)="onClickMe()" class="on-button">{{qtt === 0 ? "START" : qtt}}</button>
+        </div>
+        <div class="button-container restart-container">
+            <button (click)="onRestart()" class="restart-button">RESTART</button>
+        </div>
+    </div>
+    <div class="content ranking">
+        <h2>Ranking</h2>
+        <div class="item" *ngFor="let game of games">
+            <div>Point : {{game.point}}</div>
+            <div>Date : {{game.time | date:'dd/MM/yy - HH:mm'}}</div>
+        </div>
     </div>
 </div>
